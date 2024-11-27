@@ -1,27 +1,28 @@
 # Compiler and linker
 CXX = g++
+CXX_WIN := x86_64-w64-mingw32-g++
 CXXFLAGS = -std=c++23 -Wall -Wextra -g
 
 # Directories
 SRC_DIR = src
-OBJ_DIR = obj
+BUIDL_DIR = build
 BIN_DIR = bin
 
 # Files
 SRC_FILES = $(SRC_DIR)/main.cpp $(SRC_DIR)/warrior.cpp $(SRC_DIR)/boss.cpp $(SRC_DIR)/effect.cpp
-OBJ_FILES = $(SRC_FILES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-MAIN = $(BIN_DIR)/warriors
+LINUX_BIN = $(BIN_DIR)/warriors
+WINDOWS_BIN = $(BIN_DIR)/warriors.exe
 
 # Targets
-all: $(MAIN)
+all: $(LINUX_BIN) $(WINDOWS_BIN)
 
-$(MAIN): $(OBJ_FILES)
+$(LINUX_BIN):
 	@mkdir -p $(BIN_DIR)  # Ensure the bin directory exists
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $(LINUX_BIN) $(SRC_FILES)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)  # Ensure the obj directory exists
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+$(WINDOWS_BIN):
+	@mkdir -p $(BIN_DIR)
+	$(CXX_WIN) $(CXXFLAGS) $(SRC_FILES) -o $(WINDOWS_BIN)
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)

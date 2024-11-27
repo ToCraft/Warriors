@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	std::srand(std::time(nullptr));
 	
 	// list of possible player characters
-    Warrior warriors[] {Warrior("Legolas", 25, 500), Warrior("Gimli", 100, 250), Warrior("Gandalf", 30, 175)};
+    Warrior warriors[] {Warrior("Legolas", 25, 550), Warrior("Gimli", 110, 310), Warrior("Gandalf", 63, 175)};
     
     // list the characters for selection
     std::cout << "Valid warriors are:\n";
@@ -58,9 +58,9 @@ int main(int argc, char* argv[]) {
 	
 	// select a boss
 	Boss bosses[3] = {
-		Boss({"Smaug", "Scatha", "Glaurung"}, 150, 350),		// dragons
-		Boss({"Gorathor", "Azhagdur", "Mûrhul"}, 75, 525),		// balrogs
-		Boss({"Bolg", "Azog", "Mallorn"}, 25, 400)};			// orcs
+		Boss({"Smaug", "Scatha", "Glaurung"}, 125, 350),		// dragons
+		Boss({"Gorathor", "Azhagdur", "Mûrhul"}, 75, 475),		// balrogs
+		Boss({"Bolg", "Azog", "Mallorn"}, 35, 375)};			// orcs
 	Boss* enemy = &bosses[std::rand() % 3];
 	std::string eName = enemy->getName(std::rand() % BOSS_NAMES);
 	std::cout << "You will be fighting \033[0;31m" << eName << "\033[0m.\n\n";
@@ -91,11 +91,11 @@ int main(int argc, char* argv[]) {
 			if (hateEffect && p->getName().starts_with('G')) {
 				return 0;
 			} else {
-				return 55;
+				return 25;
 			}
 		}, [hateEffect](Warrior* p, Boss*) -> int {
 			if (hateEffect && p->getName().starts_with('G')) {
-				return 55;
+				return 75;
 			} else {
 				return 0;
 			}
@@ -164,10 +164,10 @@ int main(int argc, char* argv[]) {
 	
 	if (playerHealth <= 0) {
 		if (enemyHealth <= 0) {
-			std::cout << "\033[91m" << player->getName() << " fought bravely, but " << eName << " killed him while dying.\033[0m\n";
+			std::cout << "\n\033[91m" << player->getName() << " fought bravely, but " << eName << " killed him while dying.\033[0m\n";
 		}
 		else {
-			std::cout << "\033[91m" << player->getName() << " fought bravely, but " << eName << " won.\033[0m\n";
+			std::cout << "\n\033[91m" << player->getName() << " fought bravely, but " << eName << " won.\033[0m\n";
 		}
 	} else 	if (enemyHealth <= 0) {
 		std::cout << "\n\033[32m" << "The people of middle-earth are grateful, that " << player->getName() << " defeated the vast enemy " << eName << ".\033[0m\n";
