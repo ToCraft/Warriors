@@ -1,7 +1,7 @@
 # Compiler and linker
 CXX = g++
 CXX_WIN := x86_64-w64-mingw32-g++
-CXXFLAGS = -std=c++23 -Wall -Wextra -g
+CXXFLAGS = -std=c++17 -Wall -Wextra -g -static
 
 # Directories
 SRC_DIR = src

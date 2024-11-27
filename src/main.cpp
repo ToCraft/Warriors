@@ -88,13 +88,13 @@ int main(int argc, char* argv[]) {
 	// Hate - damage if: Enemy Name starts with S or A & player is Gandalf
 	bool hateEffect = std::regex_match(eName, std::regex("^(S|A).*"));
 	Effect hate = Effect([hateEffect](Warrior* p, Boss*) -> int {
-			if (hateEffect && p->getName().starts_with('G')) {
+			if (hateEffect && p->getName()[0] == 'G') {
 				return 0;
 			} else {
 				return 25;
 			}
 		}, [hateEffect](Warrior* p, Boss*) -> int {
-			if (hateEffect && p->getName().starts_with('G')) {
+			if (hateEffect && p->getName()[0] == 'G') {
 				return 75;
 			} else {
 				return 0;
